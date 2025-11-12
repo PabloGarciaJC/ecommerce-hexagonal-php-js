@@ -8,7 +8,7 @@
 
 <body>
     <p>Usuario <?= htmlspecialchars($user->getName()) ?> creado con éxito.</p>
-    <p><a href="/">Volver a la lista</a></p>
+    <p><a href="http://localhost:8081/?list=listar">Volver a la lista</a></p>
 </body>
 
 </html>

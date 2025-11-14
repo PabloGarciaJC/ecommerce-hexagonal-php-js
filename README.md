@@ -1,6 +1,6 @@
 # hexagonal
 
-Empresa de Blindobarras.
+Proyecto de Practica
 
 ---
 

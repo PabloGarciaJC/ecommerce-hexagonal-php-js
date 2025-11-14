@@ -1,4 +1,5 @@
 <?php
+
 namespace Application\UseCase;
 
 use Domain\Repository\UserRepositoryInterface;

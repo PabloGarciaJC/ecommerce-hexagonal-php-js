@@ -38,7 +38,7 @@ class Database
             return $pdo;
 
         } catch (PDOException $e) {
-            throw new \RuntimeException("❌ Error de conexión PDO: " . $e->getMessage());
+            throw new \RuntimeException("Error de conexión PDO: " . $e->getMessage());
         }
     }
 }

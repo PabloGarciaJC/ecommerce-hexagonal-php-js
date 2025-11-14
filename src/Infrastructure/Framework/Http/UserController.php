@@ -1,4 +1,5 @@
 <?php
+
 namespace Infrastructure\Framework\Http;
 
 use Application\UseCase\CreateUser;

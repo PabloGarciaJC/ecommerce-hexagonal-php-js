@@ -1,15 +1,8 @@
 <!doctype html>
 <html>
-
-<head>
-    <meta charset="utf-8">
-    <title>Lista Usuarios</title>
-    <link rel="stylesheet" href="/public/assets/css/users.css">
-</head>
-
+<?php include __DIR__ . '/head.php'; ?>
 <body>
     <?php include __DIR__ . '/header.php'; ?>
-
     <div class="users">
         <header class="users__header">
             <h1 class="users__title">Usuarios</h1>

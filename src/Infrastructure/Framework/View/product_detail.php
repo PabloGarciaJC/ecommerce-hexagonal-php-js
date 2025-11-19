@@ -1,24 +1,15 @@
 
 
     <div class="product-detail-container">
-
         <div class="product-detail-gallery">
-            <img class="main-img"
-                src="/public/assets/img/product-<?= $product->getId() ?>.jpg"
-                alt="<?= htmlspecialchars($product->getName()) ?>">
-
+            <img class="main-img" src="/public/assets/img/product-<?= $product->getId() ?>.jpg" alt="<?= htmlspecialchars($product->getName()) ?>">
             <div class="product-detail-thumbs">
-                <img src="/public/assets/img/product-<?= $product->getId() ?>.jpg">
                 <img src="/public/assets/img/product-<?= $product->getId() ?>.jpg">
             </div>
         </div>
-
         <div class="product-detail-info">
-
             <div class="product-detail-title"><?= htmlspecialchars($product->getName()) ?></div>
-
             <div class="product-detail-price">$<?= number_format($product->getPrice(), 2) ?></div>
-
             <div class="product-detail-rating">
                 <?php $avg = $averageRating ?? 5; ?>
                 <?php for ($i = 1; $i <= 5; $i++): ?>
@@ -26,20 +17,15 @@
                 <?php endfor; ?>
                 <span>(<?= number_format($avg, 1) ?>)</span>
             </div>
-
             <div class="product-detail-desc"><?= nl2br(htmlspecialchars($product->getDescription())) ?></div>
-
             <div class="product-detail-buy">
                 <form action="/?cart=add" method="POST">
                     <input type="hidden" name="product_id" value="<?= $product->getId() ?>">
                     <button type="submit" class="btn-primary">Añadir al carrito</button>
                 </form>
             </div>
-
             <div class="reviews-section">
-
                 <h3>Opiniones de clientes</h3>
-
                 <?php if (empty($reviews)): ?>
                     <p>No hay opiniones aún.</p>
                 <?php else: ?>
@@ -56,8 +42,6 @@
                         </div>
                     <?php endforeach; ?>
                 <?php endif; ?>
-
-
                 <?php if (!empty($_SESSION['user_id'])): ?>
                     <form class="review-form" action="/?review=add" method="POST">
                         <input type="hidden" name="product_id" value="<?= $product->getId() ?>">
@@ -69,16 +53,12 @@
                             <option value="2">★★</option>
                             <option value="1">★</option>
                         </select>
-
                         <label for="comment">Comentario:</label>
                         <textarea name="comment" id="comment" rows="3" required></textarea>
-
                         <button type="submit">Enviar opinión</button>
                     </form>
                 <?php endif; ?>
-
             </div>
-
         </div>
     </div>
 

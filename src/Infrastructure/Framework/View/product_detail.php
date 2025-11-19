@@ -1,5 +1,4 @@
 
-
     <div class="product-detail-container">
         <div class="product-detail-gallery">
             <img class="main-img" src="/public/assets/img/product-<?= $product->getId() ?>.jpg" alt="<?= htmlspecialchars($product->getName()) ?>">

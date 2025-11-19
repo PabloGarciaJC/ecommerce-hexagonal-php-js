@@ -26,40 +26,41 @@ if (session_status() === PHP_SESSION_NONE) {
 
 // Conexión y repositorios
 $pdo = Database::connect();
-$userRepository = new MySQLUserRepository($pdo);
+$userRepository    = new MySQLUserRepository($pdo);
 $productRepository = new MySQLProductRepository($pdo);
-$orderRepository = new MySQLOrderRepository($pdo);
+$orderRepository   = new MySQLOrderRepository($pdo);
 
 // Casos de uso
-$createUser = new CreateUser($userRepository);
-$listUsers  = new ListUsers($userRepository);
-$updateUser = new UpdateUser($userRepository);
-$deleteUser = new DeleteUser($userRepository);
+$createUser    = new CreateUser($userRepository);
+$listUsers     = new ListUsers($userRepository);
+$updateUser    = new UpdateUser($userRepository);
+$deleteUser    = new DeleteUser($userRepository);
 
-$listProducts = new ListProducts($productRepository);
-$showProduct = new ShowProduct($productRepository);
+$listProducts  = new ListProducts($productRepository);
+$showProduct   = new ShowProduct($productRepository);
 $createProduct = new CreateProduct($productRepository);
 
-$createOrder = new CreateOrder($orderRepository, $productRepository);
+$createOrder   = new CreateOrder($orderRepository, $productRepository);
 
 // Controladores
-$userController = new UserController($createUser, $listUsers, $updateUser, $deleteUser);
-$authController = new AuthController($userRepository);
+$userController    = new UserController($createUser, $listUsers, $updateUser, $deleteUser);
+$authController    = new AuthController($userRepository);
 $productController = new ProductController($listProducts, $showProduct, $createProduct);
-$cartController = new CartController();
-$orderController = new OrderController($createOrder);
+$cartController    = new CartController();
+$orderController   = new OrderController($createOrder);
 
-
-
-
-
-// Detectar página principal
+// Detectar página
 $page = key($_GET) ?? 'home';
+
+// 🚨 EMPEZAR BUFFER (todo lo que imprima el controlador se guarda)
+ob_start();
+
+// ---------------- ESTE ES TU ROUTER --------------------------
 
 switch ($page) {
 
     case 'login':
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_GET['login'] === 'do') {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' || ($_GET['login'] ?? '') === 'do') {
             $authController->login($_POST);
         } else {
             $authController->showLoginForm();
@@ -71,11 +72,9 @@ switch ($page) {
         break;
 
     case 'register':
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $userController->store($_POST);
-        } else {
-            $userController->form();
-        }
+        ($_SERVER['REQUEST_METHOD'] === 'POST')
+            ? $userController->store($_POST)
+            : $userController->form();
         break;
 
     case 'list':
@@ -85,79 +84,41 @@ switch ($page) {
     case 'user':
         $action = $_GET['user'] ?? '';
         switch ($action) {
-            case 'edit':
-                $userController->edit($_GET);
-                break;
-            case 'update':
-                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    $userController->update($_POST);
-                }
-                break;
-            case 'delete':
-                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    $userController->delete($_POST);
-                }
-                break;
-            default:
-                header('Location: /?list=listar');
+            case 'edit':   $userController->edit($_GET); break;
+            case 'update': if ($_SERVER['REQUEST_METHOD'] === 'POST') $userController->update($_POST); break;
+            case 'delete': if ($_SERVER['REQUEST_METHOD'] === 'POST') $userController->delete($_POST); break;
+            default: header('Location: /?list=listar'); exit;
         }
         break;
 
     case 'shop':
         $action = $_GET['shop'] ?? '';
         switch ($action) {
-            case 'catalog':
-                $productController->index();
-                break;
-            case 'product':
-                $productController->show();
-                break;
-            case 'create':
-                if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-                    $productController->create();
-                }
-                break;
-            case 'store':
-                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    $productController->store();
-                }
-                break;
-            default:
-                $productController->index();
+            case 'catalog': $productController->index(); break;
+            case 'product': $productController->show(); break;
+            case 'create': if ($_SERVER['REQUEST_METHOD'] === 'GET') $productController->create(); break;
+            case 'store': if ($_SERVER['REQUEST_METHOD'] === 'POST') $productController->store(); break;
+            default: $productController->index();
         }
         break;
 
     case 'cart':
         $action = $_GET['cart'] ?? '';
         switch ($action) {
-            case 'view':
-                $cartController->view();
-                break;
-            case 'add':
-                if ($_SERVER['REQUEST_METHOD'] === 'POST') $cartController->add();
-                break;
-            case 'remove':
-                if ($_SERVER['REQUEST_METHOD'] === 'POST') $cartController->remove();
-                break;
-            case 'clear':
-                $cartController->clear();
-                break;
-            default:
-                $cartController->view();
+            case 'view':   $cartController->view(); break;
+            case 'add':    if ($_SERVER['REQUEST_METHOD'] === 'POST') $cartController->add(); break;
+            case 'remove': if ($_SERVER['REQUEST_METHOD'] === 'POST') $cartController->remove(); break;
+            case 'clear':  $cartController->clear(); break;
+            default:       $cartController->view();
         }
         break;
 
     case 'order':
         $action = $_GET['order'] ?? '';
         switch ($action) {
-            case 'checkout':
-                if ($_SERVER['REQUEST_METHOD'] === 'POST') $orderController->checkout();
-                break;
-            case 'success':
-                $orderController->viewOrder();
-                break;
-            default:
-                $productController->index();
+            case 'checkout': if ($_SERVER['REQUEST_METHOD'] === 'POST') $orderController->checkout(); break;
+            case 'success':  $orderController->viewOrder(); break;
+            default:         $productController->index();
         }
         break;
 
@@ -171,5 +132,22 @@ switch ($page) {
         include __DIR__ . '/src/Infrastructure/Framework/View/home.php';
 }
 
+// ---------------- FIN ROUTER --------------------------
 
+$content = ob_get_clean(); // ← capturamos el contenido del router
+?>
+<!doctype html>
+<html>
 
+<?php include __DIR__ . '/src/Infrastructure/Framework/View/head.php'; ?>
+
+<body>
+
+<?php include __DIR__ . '/src/Infrastructure/Framework/View/header.php'; ?>
+
+<?= $content ?> <!-- aquí se inserta lo que imprimió el router -->
+
+<?php include __DIR__ . '/src/Infrastructure/Framework/View/footer.php'; ?>
+
+</body>
+</html>

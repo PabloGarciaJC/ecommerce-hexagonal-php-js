@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html>
 
-<head>
-    <meta charset="utf-8">
-    <title><?= htmlspecialchars($product->getName()) ?></title>
-    <link rel="stylesheet" href="/public/assets/css/ecommerce.css">
-</head>
-
-<body class="users">
-
-    <?php include __DIR__ . '/header.php'; ?>
 
     <div class="product-detail-container">
 
@@ -98,19 +87,5 @@
             </div>
 
         </div>
-
     </div>
 
-    <footer class="footer">
-        <div class="footer__links">
-            <a href="#">Condiciones</a>
-            <a href="#">Privacidad</a>
-            <a href="#">Ayuda</a>
-            <a href="#">Contacto</a>
-        </div>
-        <div class="footer__copy">&copy; 2025 Ecommerce Hexagon. Proyecto demo.</div>
-    </footer>
-
-</body>
-
-</html>

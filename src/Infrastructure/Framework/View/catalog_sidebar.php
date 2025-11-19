@@ -1,7 +1,6 @@
 <aside class="catalog-sidebar">
     <form method="GET" action="/?shop=catalog" class="filter-form">
         <h3>Filtrar</h3>
-
         <div class="filter-group">
             <label for="cat">Categoría:</label>
             <select name="cat" id="cat">
@@ -13,7 +12,6 @@
                 <option value="deportes">Deportes</option>
             </select>
         </div>
-
         <div class="filter-group">
             <label>Precio:</label>
             <div class="price-range">
@@ -22,7 +20,6 @@
                 <input type="number" name="max" placeholder="Máx">
             </div>
         </div>
-
         <div class="filter-group">
             <label for="order">Ordenar por:</label>
             <select name="order" id="order">
@@ -33,7 +30,6 @@
                 <option value="name_desc">Nombre Z-A</option>
             </select>
         </div>
-
         <button type="submit" class="btn btn-primary">Filtrar</button>
     </form>
 </aside>

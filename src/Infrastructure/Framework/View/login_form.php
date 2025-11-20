@@ -16,9 +16,9 @@ $error = \Infrastructure\Framework\Helper\FlashMessage::getError();
         Los usuarios proporcionados son ficticios y están destinados para realizar pruebas.
     </p>
     <div class="login-quickusers">
-        <div class="usercard" data-email="pablodemo@hotmail.com" data-password="password">
-            <strong>Cliente de prueba</strong>
-            pablodemo@hotmail.com
+        <div class="usercard" data-email="demo@pablogarciajc.com" data-password="password">
+            <strong>Usuario de Prueba</strong>
+            demo@pablogarciajc.com
             <p><a href="#" class="quick-select">Seleccionar</a></p>
         </div>
     </div>

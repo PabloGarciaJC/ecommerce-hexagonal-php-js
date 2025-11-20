@@ -26,7 +26,7 @@
 
                             <form style="display:inline" method="POST" action="/?user=delete">
                                 <input type="hidden" name="id" value="<?= $u->getId() ?>">
-                                <button class="users__button" type="submit" onclick="return confirm('¿Eliminar usuario?')">Eliminar</button>
+                                <!-- <button class="users__button" type="submit" onclick="return confirm('¿Eliminar usuario?')">Eliminar</button> -->
                             </form>
                         </td>
                     </tr>

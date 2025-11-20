@@ -14,7 +14,7 @@
             }
             ?>
             <a class="app-header__link" href="/?shop=catalog">Catálogo</a>
-            <a class="app-header__link" href="/?cart=view">🛒 Carrito (<?= $cartCount ?>)</a>
+            <a class="app-header__link" href="/?cart=view">Carrito (<?= $cartCount ?>)</a>
             <?php if (!empty($_SESSION['user_id'])): ?>
                 <span class="app-header__user">Hola, <?= htmlspecialchars($_SESSION['user_name'] ?? 'Usuario') ?></span>
                 <a class="app-header__link" href="/?logout=yes">Salir</a>

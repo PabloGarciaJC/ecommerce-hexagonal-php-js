@@ -24,9 +24,7 @@ La plataforma cuenta con **cuatro módulos principales** que optimizan la experi
 
 ### Roles de Usuario Iniciales
 
-El sistema está diseñado inicialmente con **dos roles**:
-
-1. **Cliente**: Accede principalmente a funcionalidades relacionadas con la compra de productos, visualización de su cuenta, carrito de compras, y favoritos.
+1. **Cliente**: Accede principalmente a funcionalidades relacionadas con la compra de productos, visualización de su cuenta, carrito de compras.
 
 ## Tecnologías Usadas
 

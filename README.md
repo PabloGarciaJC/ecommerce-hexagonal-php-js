@@ -1,6 +1,6 @@
 # Ecommerce (Hexagonal + PHP + JS)
 
-**Ecommerce Hexagonal** es un sistema de gestión de contenidos especializado en comercio electrónico, desarrollado con **PHP** siguiendo la **Arquitectura Hexagonal** y potenciado con **JavaScript** para la interactividad del lado del cliente. Este proyecto tiene un propósito educativo: sirve como entorno de aprendizaje para mejorar mis habilidades en **arquitectura hexagonal** y desarrollo con **PHP**, y se va ampliando progresivamente a medida que profundizo en estos conceptos.
+**Ecommerce Hexagonal** es un comercio electrónico, desarrollado con **PHP** siguiendo la **Arquitectura Hexagonal** y potenciado con **JavaScript** para la interactividad del lado del cliente. Este proyecto tiene un propósito educativo: sirve como entorno de aprendizaje para mejorar mis habilidades en **arquitectura hexagonal** y desarrollo con **PHP**, y se va ampliando progresivamente a medida que profundizo en estos conceptos.
 
 ## Demo del Proyecto
 
